@@ -1,4 +1,4 @@
-#Inception 备份功能说明
+# Inception 备份功能说明
 上面已经提到，Inception在做DML操作时，具有备份功能，它会将所有当前语句修改的行备份下来，存储到一个指定的库中，这些库的指定需要通过几个参数，它们分别是：
 
 * `inception_remote_backup_host //远程备份库的host`
@@ -42,7 +42,7 @@
 -------
 针对现在备份及回滚的实现方案，如果已经知道一个语句的执行序列，想拿到这个语句的回滚语句，要执行的 SQL 语句为：  
 ````
-select rollback_statement from 192_168_1_1_3310_inceptiondb.inception_test 
+select rollback_statement from 192_168_1_1_3310_inceptiondb.inception_test
 where opid_time =‘1413347135_136_3’;
 ````
 上面语句查出来的只是针对一个语句块中某一条语句的回滚语句，但是如果想要得到整个语句块的回滚语句，还需要在这基础上做二次开发，针对每条语句的回滚（包括多条回滚语句）语句的前后，加上事务，保证这个回滚是原子的，并且按照执行结果的最后一个列的倒序将回滚语句排序，这样查出来的就是完整的回滚语句。
@@ -64,15 +64,15 @@ CREATE TABLE myinfo (
 
 要执行的 alter 表语句为：  
 ````
-alter table myinfo 
-rename to myinfo1, 
-add column age3 int not null comment 'age', 
-add index idx_age2(age2), 
+alter table myinfo
+rename to myinfo1,
+add column age3 int not null comment 'age',
+add index idx_age2(age2),
 drop column age;
 ````  
 那么产生的回滚语句为：  
 ````
-ALTER TABLE inception.myinfo1 
+ALTER TABLE inception.myinfo1
 DROP COLUMN age3,
 DROP INDEX idx_age2,
 ADD COLUMN age int(11) NOT NULL COMMENT 'age',
