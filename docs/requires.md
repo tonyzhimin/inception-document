@@ -1,4 +1,4 @@
-#Inception 对线上配置需求
+# Inception 对线上配置需求
 1.  线上服务器必须要打开 binlog，在启动时需要设置参数log_bin、log_bin_index等关于 binlog 的参数。不然不会备份及生成回滚语句。
 2. 参数binlog_format必须要设置为 mixed 或者 row 模式，通过语句： set global binlog_format=mixed/row 来设置，如果是 statement 模式，则不做备份及回滚语句的生成。
 3.  参数 server_id 必须要设置为非0及非1，通过语句：set global server_id=server_id;来设置，不然在备份时会报错。
