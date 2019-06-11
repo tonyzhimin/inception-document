@@ -1,4 +1,4 @@
-#Inception安装说明
+# Inception安装说明
 看到这个手册，想必已经得到了源码，恭喜你。  
 
 首先就是编译，在源码根目录下面有一个文件inception_build.sh，执行命令`sh inception_build.sh`，会输出使用方法。
